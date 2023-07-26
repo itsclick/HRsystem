@@ -1,0 +1,51 @@
+Personal Details
+firstName
+lastNname
+dateOfBirth
+gener
+maratialStatus
+mothersMaindenName
+nationality
+tinNo
+ssnitNo
+photo
+
+===contact Details
+presentAddress
+city
+country
+mobile
+email
+
+======bank Details
+bankName
+branchName
+accountName
+accountNumber
+
+=======Official status
+emp_id
+status
+department
+joiningDate
+
+=========Contact Person (Family Relation)
+fullName
+houseNumber
+telNumber
+occupation
+relationshipToEmp
+
+======Employee Documents
+resume
+offerLetter
+JoiningLetter
+contractPaper
+idProff
+otherDocument
+
+=====Leave Info
+NumberOfLeave
+LeaveDaysTaken
+LeaveBalance
+

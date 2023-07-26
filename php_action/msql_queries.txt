@@ -1,0 +1,168 @@
+------------Select last N rows from MySQL
+
+SELECT 
+    *
+FROM
+    `table`
+ORDER BY id DESC
+LIMIT 50;
+----------
+SELECT 
+    *
+FROM
+    `table`
+WHERE
+    id > ((SELECT 
+            MAX(id)
+        FROM
+            chat) - 50)
+ORDER BY id ASC;
+
+----------How to get last n records ?
+
+SELECT * FROM mytable
+WHERE TIME(timecolumn) BETWEEN '10:20' and '11:20'
+ORDER BY id DESC
+LIMIT 3;
+
+===============
+In a recent software project I needed to select the upcoming birthdays of the
+users. But now I detected a problem with the turn of the year. After some time
+of researching and trying, I found a stable solution. For your convenience,
+here’s the code:
+
+---
+SELECT emp_fullname,emp_dob,
+DATE_FORMAT(CURRENT_DATE, '%Y') - DATE_FORMAT(emp_dob, '%Y') + IF(
+DATE_FORMAT(emp_dob, '%m%d') < DATE_FORMAT(CURRENT_DATE, '%m%d'), 1, 0) AS new_age, DATEDIFF(emp_dob + INTERVAL YEAR(CURRENT_DATE) - YEAR(emp_dob) + IF(DATE_FORMAT(CURRENT_DATE, '%m%d') > DATE_FORMAT(emp_dob, '%m%d'), 1, 0) YEAR,
+CURRENT_DATE) AS days_to_birthday
+FROM employees
+HAVING days_to_birthday < 14 ORDER BY days_to_birthday ASC;
+
+----
+SET @today = '2007-12-20';
+SELECT
+user_id,
+birthday,
+DATE_FORMAT(@today, '%Y') - DATE_FORMAT(birthday, '%Y') + IF(
+DATE_FORMAT(birthday, '%m%d') < DATE_FORMAT(@today, '%m%d'), 1, 0) AS new_age, DATEDIFF(birthday + INTERVAL YEAR(@today) - YEAR(birthday) + IF(DATE_FORMAT(@today, '%m%d') > DATE_FORMAT(birthday, '%m%d'), 1, 0) YEAR,
+@today) AS days_to_birthday
+FROM users
+HAVING days_to_birthday < 14 ORDER BY days_to_birthday ASC;
+And you can easily extend it to limit the result to some specific ages. This is
+very useful if you want only the big O coming up:
+...
+HAVING days_to_birthday < 14 AND new_age IN (10,20,30,40,50,60,70,80,90,100) ...
+
+================= Upcoming birthdays regardless of year
+CREATE TABLE emp_info(
+  dow DATE DEFAULT NULL
+);
+
+INSERT INTO emp_info VALUES 
+  ('2010-10-07'),
+  ('2010-09-07'),
+  ('2010-11-07'),
+  ('2010-10-10'),
+  ('2010-12-10'),
+  ('2011-02-23');
+
+SELECT * FROM emp_info WHERE dow >= CURDATE() AND dow <= DATE_ADD(CURDATE(), INTERVAL 60 DAY);
+
++------------+
+| dow        |
++------------+
+| 2010-10-07 |
+| 2010-11-07 |
+| 2010-10-10 |
++------------+
+
+---------
+SELECT * FROM emp_info 
+  WHERE 
+    dow >= DATE_SUB(CURDATE(), INTERVAL YEAR(CURDATE()) - YEAR(dow) YEAR)
+  AND
+    dow <= DATE_ADD(DATE_SUB(CURDATE(), INTERVAL YEAR(CURDATE()) - YEAR(dow) YEAR), INTERVAL 60 DAY);
+
+---------------
+CREATE TABLE `birthdays` (
+`name` varchar(200) NOT NULL,
+`birthday` date NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `birthdays`
+--
+
+INSERT INTO `birthdays` (`name`, `birthday`) VALUES ('BDAY 01', '2008-05-14'),
+('BDAY 02', '1988-05-19'),
+('BDAY 03', '2008-12-03'),
+('BDAY 04', '2008-12-04'),
+('BDAY 05', '2008-12-05'),
+('BDAY 06', '2008-12-06'),
+('BDAY 07', '2008-12-07'),
+('BDAY 08', '2008-12-08'),
+('BDAY 09', '2008-12-09'),
+('BDAY 10', '2008-12-10'),
+('BDAY 11', '2008-12-11'),
+('BDAY 12', '2008-12-12'),
+('BDAY 13', '2008-12-13'),
+('BDAY 14', '2008-12-14'),
+('BDAY 15', '2008-12-15'),
+('BDAY 16', '2008-12-16'),
+('BDAY 17', '2008-12-17'),
+('BDAY 18', '2008-12-18'),
+('BDAY 19', '2008-12-19'),
+('BDAY 20', '2008-12-20'),
+('BDAY 21', '2008-12-21'),
+('BDAY 22', '2008-12-22'),
+('BDAY 23', '2008-12-23'),
+('BDAY 24', '2008-12-24'),
+('BDAY 25', '2008-12-25'),
+('BDAY 26', '2008-12-26'),
+('BDAY 27', '2008-12-27'),
+('BDAY 28', '2008-12-28'),
+('BDAY 29', '2008-12-29'),
+('BDAY 30', '2008-12-30'),
+('BDAY 31', '2008-12-31'),
+('BDAY 32', '2008-01-01'),
+('BDAY 33', '2008-01-02'),
+('BDAY 34', '2008-01-03'),
+('BDAY 35', '2008-01-04'),
+('BDAY 36', '2008-01-05'),
+('BDAY 37', '2008-01-06'),
+('BDAY 38', '2008-01-07'),
+('BDAY 39', '2008-01-08'),
+('BDAY 40', '2008-01-09'),
+('BDAY 41', '2008-01-10'),
+('BDAY 42', '2008-01-11'),
+('BDAY 43', '2008-01-12'),
+('BDAY 44', '2008-01-13'),
+('BDAY 45', '2008-01-14'),
+('BDAY 46', '2008-01-15'),
+('BDAY 47', '2008-01-16'),
+('BDAY 48', '2008-01-17'),
+('BDAY 49', '2008-01-18'),
+('BDAY 50', '2008-01-19'),
+('BDAY 51', '2008-01-20'),
+('BDAY 52', '2008-01-21'),
+('BDAY 53', '2008-01-22'),
+('BDAY 54', '2008-01-23'),
+('BDAY 55', '2008-01-24'),
+('BDAY 56', '2008-01-25'),
+('BDAY 57', '2008-01-26'),
+('BDAY 58', '2008-01-27'),
+('BDAY 59', '2008-01-28'),
+('BDAY 60', '2008-01-29'),
+('BDAY 61', '2008-01-30'),
+('BDAY 62', '2008-01-31');
+
+select
+name,
+concat(date_format(birthday, '%m'),'-', date_format(birthday, '%d'))
+from
+birthdays
+where
+((date_format(birthday, '%m%d') between date_format(curdate(), '%m%d') and if((month(curdate()) = 12 and day(curdate()) > 24), date_format(str_to_date('12312008', '%m%d%y'), '%m%d'), date_format(adddate(curdate(), interval 7 day), '%m%d')))
+or
+(date_format(birthday, '%m%d') between if((month(curdate()) = 12 and day(curdate()) > 24), date_format(str_to_date('01012008', '%m%d%y'), '%m%d'), date_format(curdate(), '%m%d')) and if((month(curdate()) = 12 and day(curdate()) > 24), date_format(adddate(str_to_date('01012008', '%m%d%y'), interval (6-(31-day(curdate()))) day), '%m%d'), date_format(adddate(curdate(), interval 7 day), '%m%d'))));

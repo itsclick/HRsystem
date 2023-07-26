@@ -1,0 +1,117 @@
+if($emp_photo == "" || $emp_resume =="" || $emp_offerLetter =="" || $emp_joiningLetter =="" || $emp_contractPaper =="" || $emp_idProff =="" || $emp_otherDocument =="")
+				{ 
+				 include ('conn.php');
+				 
+				 $update_emp = " Update employees SET emp_code='$emp_code',emp_joining_date='$emp_joining_date',emp_fullname='$emp_fullname',emp_dob='$emp_dob',emp_gender='$emp_gender',emp_maratial_status='$emp_maratial_status',
+				 emp_mothers_mainden_name='$emp_mothers_mainden_name',emp_nationality='$emp_nationality',emp_tin_number='$emp_tin_number',emp_ssnit_number='$emp_ssnit_number',
+				 emp_present_address='$emp_present_address',emp_city='$emp_city',emp_country='$emp_country',emp_mobile='$emp_mobile',emp_email='$emp_email',bank_name='$bank_name',bank_branch='$bank_branch',bank_account_name='$bank_account_name',
+				 bank_account_no='$bank_account_no',emp_contact_fullname='$emp_contact_fullname',emp_contact_housenumber='$emp_contact_housenumber',emp_contact_mobile='$emp_contact_mobile',emp_contact_occupation='$emp_contact_occupation',
+				 emp_contact_relationshipToEmp='$emp_contact_relationshipToEmp',position_id='$position_id',head_dep_id='$head_dep_id',status='$status' where emp_id=$emp_id ";
+
+                 
+                 $result= mysqli_query($conn,$update_emp);
+
+                   if($result)
+				    {
+                       echo  "<script>alert('Update is successfully completed')</script>";
+                       echo "<script>window.open('view_employees','_self')</script>";
+                    } else 
+				    {		
+	                    echo  "<script>alert('Update is not successfully completed')</script>";
+				        echo "<script>window.open('view_employees','_self')</script>";		         
+                    }
+				} else if(move_uploaded_file($emp_photo_tmp,'./images/photo/'.$emp_photo) || move_uploaded_file($emp_resume_tmp,'./images/photo/'.$emp_resume)|| move_uploaded_file($emp_offerLetter_tmp,'./images/photo/'.$emp_offerLetter)|| move_uploaded_file($emp_joiningLetter_tmp,'./images/photo/'.$emp_joiningLetter)|| move_uploaded_file($emp_contractPaper_tmp,'./images/photo/'.$emp_contractPaper)|| move_uploaded_file($emp_idProff_tmp,'./images/photo/'.$emp_idProff)|| move_uploaded_file($emp_otherDocument_tmp,'./images/photo/'.$emp_otherDocument))
+			        {				
+                       //inserting data
+				      include ('conn.php');
+				 
+				     $update_emp = " Update employees SET emp_code='$emp_code',emp_joining_date='$emp_joining_date',emp_fullname='$emp_fullname',emp_dob='$emp_dob',emp_gender='$emp_gender',emp_maratial_status='$emp_maratial_status',
+				     emp_mothers_mainden_name='$emp_mothers_mainden_name',emp_nationality='$emp_nationality',emp_tin_number='$emp_tin_number',emp_ssnit_number='$emp_ssnit_number',
+				     emp_present_address='$emp_present_address',emp_city='$emp_city',emp_country='$emp_country',emp_mobile='$emp_mobile',emp_email='$emp_email',bank_name='$bank_name',bank_branch='$bank_branch',bank_account_name='$bank_account_name',
+				     bank_account_no='$bank_account_no',emp_contact_fullname='$emp_contact_fullname',emp_contact_housenumber='$emp_contact_housenumber',emp_contact_mobile='$emp_contact_mobile',emp_contact_occupation='$emp_contact_occupation',
+				     emp_contact_relationshipToEmp='$emp_contact_relationshipToEmp',position_id='$position_id',head_dep_id='$head_dep_id',emp_photo='$emp_photo',emp_resume='$emp_resume',emp_offerLetter='$emp_offerLetter',emp_joiningLetter='$emp_joiningLetter',
+				     emp_contractPaper='$emp_contractPaper',emp_idProff='$emp_idProff',emp_otherDocument='$emp_otherDocument',status='$status' where emp_id=$emp_id ";
+
+                        $result= mysqli_query($conn,$update_emp);
+
+                        if($result)
+				        {
+                           echo  "<script>alert('Update is successfully completed')</script>";
+                          echo "<script>window.open('view_employees','_self')</script>";
+					    
+                        } else 
+				        {		
+	                      echo  "<script>alert('Update is not successfully completed')</script>";
+				          echo "<script>window.open('view_employees','_self')</script>";		         
+                        }
+				
+				    }				
+				    else 
+					{
+						include ('conn.php');
+				 
+				        $update_emp = " Update employees SET emp_code='$emp_code',emp_joining_date='$emp_joining_date',emp_fullname='$emp_fullname',emp_dob='$emp_dob',emp_gender='$emp_gender',emp_maratial_status='$emp_maratial_status',
+				        emp_mothers_mainden_name='$emp_mothers_mainden_name',emp_nationality='$emp_nationality',emp_tin_number='$emp_tin_number',emp_ssnit_number='$emp_ssnit_number',
+				        emp_present_address='$emp_present_address',emp_city='$emp_city',emp_country='$emp_country',emp_mobile='$emp_mobile',emp_email='$emp_email',bank_name='$bank_name',bank_branch='$bank_branch',bank_account_name='$bank_account_name',
+				        bank_account_no='$bank_account_no',emp_contact_fullname='$emp_contact_fullname',emp_contact_housenumber='$emp_contact_housenumber',emp_contact_mobile='$emp_contact_mobile',emp_contact_occupation='$emp_contact_occupation',
+				       emp_contact_relationshipToEmp='$emp_contact_relationshipToEmp',position_id='$position_id',head_dep_id='$head_dep_id',status='$status' where emp_id=$emp_id ";
+
+                 
+                       $result= mysqli_query($conn,$update_emp);
+
+                        if($result)
+				        {
+                            echo  "<script>alert('Update is successfully completed')</script>";
+                            echo "<script>window.open('view_employees','_self')</script>";
+                        } else 
+				        {		
+	                       echo  "<script>alert('Update is not successfully completed')</script>";
+				           echo "<script>window.open('view_employees','_self')</script>";		         
+                        }	
+				    }
+					================================
+					                { 
+				 include ('conn.php');
+				 
+				 $update_emp = " Update employees SET emp_code='$emp_code',emp_joining_date='$emp_joining_date',emp_fullname='$emp_fullname',emp_dob='$emp_dob',emp_gender='$emp_gender',emp_maratial_status='$emp_maratial_status',
+				 emp_mothers_mainden_name='$emp_mothers_mainden_name',emp_nationality='$emp_nationality',emp_tin_number='$emp_tin_number',emp_ssnit_number='$emp_ssnit_number',
+				 emp_present_address='$emp_present_address',emp_city='$emp_city',emp_country='$emp_country',emp_mobile='$emp_mobile',emp_email='$emp_email',bank_name='$bank_name',bank_branch='$bank_branch',bank_account_name='$bank_account_name',
+				 bank_account_no='$bank_account_no',emp_contact_fullname='$emp_contact_fullname',emp_contact_housenumber='$emp_contact_housenumber',emp_contact_mobile='$emp_contact_mobile',emp_contact_occupation='$emp_contact_occupation',
+				 emp_contact_relationshipToEmp='$emp_contact_relationshipToEmp',position_id='$position_id',head_dep_id='$head_dep_id',status='$status' where emp_id=$emp_id ";
+
+                 
+                 $result= mysqli_query($conn,$update_emp);
+
+                   if($result)
+				    {
+                       echo  "<script>alert('Update is successfully completed')</script>";
+                       echo "<script>window.open('view_employees','_self')</script>";
+                    } else 
+				    {		
+	                    echo  "<script>alert('Update is not successfully completed')</script>";
+				        echo "<script>window.open('view_employees','_self')</script>";		         
+                    }
+					
+					===================
+					else 
+					{
+						include ('conn.php');
+				 
+				        $update_emp = " Update employees SET emp_code='$emp_code',emp_joining_date='$emp_joining_date',emp_fullname='$emp_fullname',emp_dob='$emp_dob',emp_gender='$emp_gender',emp_maratial_status='$emp_maratial_status',
+				        emp_mothers_mainden_name='$emp_mothers_mainden_name',emp_nationality='$emp_nationality',emp_tin_number='$emp_tin_number',emp_ssnit_number='$emp_ssnit_number',
+				        emp_present_address='$emp_present_address',emp_city='$emp_city',emp_country='$emp_country',emp_mobile='$emp_mobile',emp_email='$emp_email',bank_name='$bank_name',bank_branch='$bank_branch',bank_account_name='$bank_account_name',
+				        bank_account_no='$bank_account_no',emp_contact_fullname='$emp_contact_fullname',emp_contact_housenumber='$emp_contact_housenumber',emp_contact_mobile='$emp_contact_mobile',emp_contact_occupation='$emp_contact_occupation',
+				        emp_contact_relationshipToEmp='$emp_contact_relationshipToEmp',position_id='$position_id',head_dep_id='$head_dep_id',status='$status' where emp_id=$emp_id ";
+
+                 
+                       $result= mysqli_query($conn,$update_emp);
+
+                        if($result)
+				        {
+                            echo  "<script>alert('Update is successfully completed')</script>";
+                            echo "<script>window.open('view_employees','_self')</script>";
+                        } else 
+				        {		
+	                       echo  "<script>alert('Update is not successfully completed')</script>";
+				           echo "<script>window.open('view_employees','_self')</script>";		         
+                        }	
